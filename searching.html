@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Names</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Light background color */
+            margin: 0;
+            height: 95.8vh;
+            padding: 20px;
+            background-image: url(bgIMG.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Main container styling */
+        .main {
+            /* max-width: 600px; Maximum width of the container */
+            /* margin: auto; Center the container */
+            height: 720px;
+            width: 40%;
+            background: #000000b5; /* White background for the main container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            padding: 20px; /* Padding inside the container */
+        }
+
+        /* Styling for the search box */
+        .search-box {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between input and button */
+            margin-bottom: 20px; /* Space below the search box */
+            background-color: #f8f9fa; /* Light background for the search box */
+            padding: 10px; /* Padding inside the search box */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Input field styling */
+        #search {
+            width: 80%; /* Width of the input field */
+            padding: 10px; /* Padding inside the input field */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 15px; /* Padding inside the button */
+            background-color: #007BFF; /* Blue background for the button */
+            color: white; /* White text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Font size */
+            transition: 0.3s; /* Smooth transition for hover effect */
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Names list styling */
+        .names {
+            height: 470px;
+            margin: 20px 0; /* Space above and below the names list */
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        /* Individual name styling */
+        .name {
+            padding: 10px; /* Padding inside each name */
+            border-bottom: 1px solid #eee; /* Light bottom border */
+            transition: 0.3s; /* Smooth transition for hover effect */
+            background-color: white; /* Light gray background for each name */
+            font-weight: 600;
+        
+        }
+
+        /* Hover effect for names */
+        .name:hover {
+            background-color: #e2e6ea; /* Slightly darker gray on hover */
+        }
+
+        /* Highlighted name styling */
+        .highlight {
+            background-color: #ffeb3b; /* Yellow background for matched names */
+            font-size: 18px;
+            transition: 0.7s;
+        }
+
+        /* Result message styling */
+        .result {
+            font-size: 20px;
+            font-weight: bold; /* Bold text */
+            margin-top: 20px; /* Space above the result message */
+            color: #333; /* Dark text color */
+            background-color: #d4edda; /* Light green background for search results */
+            padding: 10px; /* Padding inside the result message */
+            border-radius: 5px; /* Rounded corners */
+        }
+        h1{
+            height: 60px;
+            width: 100%;
+            text-align: center;
+            color: ivory;
+            text-shadow: 2px 2px 7px rgb(0, 255, 187);
+        }
+        #india{
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        #aus{
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>AUSTRALIA VS INDIA SYDNEY TEST 2025</h1>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search for a name..."> <!-- Input field for search -->
+            <button onclick="search()">Search</button> <!-- Button to trigger search -->
+        </div>
+        <div class="names">
+            <div class="name" id="india">INDIA PLAYING XI</div>
+            <div class="name">Y JAISWAL</div>
+            <div class="name">KL RAHUL</div>
+            <div class="name">S GILL</div>
+            <div class="name">V KOHLI</div>
+            <div class="name">R PANT (WK)</div>
+            <div class="name">N REDDY</div>
+            <div class="name">R JADEJA</div>
+            <div class="name">W SUNDAR</div>
+            <div class="name">H RANA</div>
+            <div class="name">J BUMRAH (C)</div>
+            <div class="name">M SIRAJ</div>
+            <div class="name" id="aus">AUSTRALIA PLAYING XI</div>
+            <div class="name">S KONSTAS</div>
+            <div class="name">U KHAWAJA</div>
+            <div class="name">M LABUSCHAGNE</div>
+            <div class="name">S SMITH</div>
+            <div class="name">T HEAD</div>
+            <div class="name">B WEBSTER</div>
+            <div class="name">A CARRY (WK)</div>
+            <div class="name">P CUMMINS (C)</div>
+            <div class="name">M STARC</div>
+            <div class="name">N LYON</div>
+            <div class="name">S BOLAND</div>
+        </div>
+        
+        <div class="result" id="result"></div> <!-- Div to display search results -->
+    </div>
+
+    <script>
+        function search() {
+            var searchValue = document.getElementById("search").value.toLowerCase().trim(); // Get the search input value
+            var names = document.getElementsByClassName("name"); // Get all name elements
+            var found = false; // Flag to check if a name is found
+
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i].textContent.toLowerCase(); // Convert name to lowercase for comparison
+
+                if (name.includes(searchValue) && searchValue !== "") { // Check if name includes the search value
+                    names[i].classList.add("highlight"); // Highlight matched name
+                    found = true; // Set found flag to true
+                } else {
+                    names[i].classList.remove("highlight"); // Remove highlight if not matched
+                }
+            }
+
+            if (found) {
+                document.getElementById("result").innerHTML = "SEARCH FOUND"; // Display found message
+            } else if (searchValue !== "") {
+                document.getElementById("result").innerHTML = "SEARCH NOT FOUND"; // Display not found message
+            } else {
+                document.getElementById("result").innerHTML = ""; // Clear result if input is empty
+            }
+        }
+
+        document.getElementById("search").onkeyup = function (event) {
+            if(event.key == 'Enter'){ // Check if Enter key is pressed
+                search(); // Trigger search function
+            }
+        }
+    </script>
+</body>
+</html>
