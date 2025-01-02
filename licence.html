@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        /* Reset default margin and padding for all elements */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+      
+        /* Style for the body */
+        body {
+          height: 100vh; /* Full height of the viewport */
+          width: 100%; /* Full width */
+          display: flex; /* Flexbox layout */
+          align-items: center; /* Center items vertically */
+          background-color: ivory; /* Background color */
+          font-family: "Arial", sans-serif; /* Font family */
+          background-image: url(https://www.hdwallpapers.in/download/tricolor_indian_flag_independence_day_4k_hd_indian_flag-1600x900.jpg); /* Background image */
+          background-repeat: no-repeat; /* No repeat of the background image */
+          background-size: cover; /* Cover the entire area */
+        }
+      
+        /* Style for the main heading */
+        h1 {
+          height: 100px; /* Fixed height */
+          width: 100%; /* Full width */
+          font-family: Georgia, "Times New Roman", Times, serif; /* Font family */
+          display: flex; /* Flexbox layout */
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          color: ivory; /* Text color */
+          animation: fadeIn 0.7s ease-in-out; /* Fade-in animation */
+        }
+      
+        /* Style for the form container */
+        .form {
+          height: 850px; /* Fixed height */
+          width: 40%; /* Width of the form */
+          padding: 15px; /* Padding inside the form */
+          border: 1px solid #4a4a4a; /* Border style */
+          border-radius: 25px; /* Rounded corners */
+          background-color: #0e4259e6; /* Background color */
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Shadow effect */
+          animation: slideIn 0.5s ease-in-out; /* Slide-in animation */
+          margin-left: 10%; /* Left margin */
+        }
+      
+        /* Style for labels */
+        label {
+          height: 65px; /* Fixed height */
+          display: block; /* Block display */
+          width: 100%; /* Full width */
+          font-size: 20px; /* Font size */
+          font-weight: 600; /* Font weight */
+          color: ivory; /* Text color */
+          display: flex; /* Flexbox layout */
+          align-items: center; /* Center vertically */
+          margin-left: 7px; /* Left margin */
+        }
+      
+        /* Style for input fields */
+        input {
+          height: 50px; /* Fixed height */
+          width: 100%; /* Full width */
+          border: 2px solid #4a4a4a; /* Border style */
+          border-radius: 20px; /* Rounded corners */
+          font-size: 20px; /* Font size */
+          font-weight: 600; /* Font weight */
+          transition: border-color 0.3s, box-shadow 0.3s; /* Transition effects */
+          display: flex; /* Flexbox layout */
+          align-items: center; /* Center vertically */
+          padding: 10px; /* Padding inside the input */
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); /* Shadow effect */
+        }
+      
+        /* Style for focused input fields */
+        input:focus {
+          border-color: #0e4259; /* Change border color on focus */
+          outline: none; /* Remove outline */
+          box-shadow: 0 0 13px rgba(255, 255, 255, 0.5); /* Shadow effect on focus */
+        }
+      
+        /* Style for the submit button container */
+        .sub {
+          height: 100px; /* Fixed height */
+          width: 100%; /* Full width */
+          display: flex; /* Flexbox layout */
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+        }
+      
+        /* Style for the submit button */
+        .sub button {
+          height: 50px; /* Fixed height */
+          width: 40%; /* Width of the button */
+          font-size: 18px; /* Font size */
+          font-family: Georgia, "Times New Roman", Times, serif; /* Font family */
+          font-weight : 600; /* Font weight */
+          border: none; /* No border */
+          border-radius: 20px; /* Rounded corners */
+          background-color: rgb(236, 67, 67); /* Background color */
+          color: #ffffff; /* Text color */
+          cursor: pointer; /* Pointer cursor on hover */
+          transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition effects */
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Shadow effect */
+        }
+      
+        /* Style for the button on hover */
+        .sub button:hover {
+          background-color: #4cb31d; /* Change background color on hover */
+          color: white; /* Change text color on hover */
+          transform: scale(1.05); /* Slightly enlarge the button */
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+        }
+      
+        /* Style for the result display */
+        .result {
+          font-size: 18px; /* Font size */
+          color: ivory; /* Text color */
+          animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+          display: flex; /* Flexbox layout */
+          align-items: center; /* Center vertically */
+          padding: 20px; /* Padding around the result */
+        }
+      
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+          from {
+            opacity: 0; /* Start fully transparent */
+          }
+          to {
+            opacity: 1; /* End fully opaque */
+          }
+        }
+      
+        /* Keyframes for slide-in animation */
+        @keyframes slideIn {
+          from {
+            transform: translateY(-20px); /* Start slightly above */
+            opacity: 0; /* Start fully transparent */
+          }
+          to {
+            transform: translateY(0); /* End at original position */
+            opacity: 1; /* End fully opaque */
+          }
+        }
+      </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1>LICENCE APPLICATION</h1>
+      <!-- Form for license application -->
+      <form action="">
+        <label for="firstName">Enter First Name :</label>
+        <input
+          type="text"
+          id="firstName"
+          placeholder="Enter First Name"
+          required
+        />
+        <label for="lastName">Enter Last Name :</label>
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Enter Last Name"
+          required
+        />
+        <label for="phNo">Enter Your Phone Number :</label>
+        <input
+          type="text"
+          id="phNo"
+          maxlength="10"
+          placeholder="Enter Phone Number"
+          required
+        />
+        <label for="dob">Enter Your DOB :</label>
+        <input type="date" id="dob" required />
+        <div class="sub"><button onclick="age(event)">SUBMIT</button></div>
+      </form>
+
+      <div class="result" id="result"></div>
+    </div>
+    <!-- Script to handle form submission and age calculation -->
+    <script>
+      function age(event) {
+        event.preventDefault(); // Prevent form submission
+        var Fname = document.getElementById("firstName").value; // Get first name
+        var Lname = document.getElementById("lastName").value; // Get last name
+        var phNo = document.getElementById("phNo").value; // Get phone number
+        var dob = document.getElementById("dob").value; // Get date of birth
+
+        // Check if all fields are filled
+        if (!Fname || !Lname || !dob || !phNo) {
+          alert("PLEASE FILL IN ALL FIELDS."); // Alert if fields are empty
+          return;
+        }
+        // Validate phone number length
+        else if(phNo.length != 10){
+          alert("PLEASE ENTER A VALID PHONE NUMBER"); // Alert if phone number is invalid
+          return;
+        }
+        var today = new Date(); // Get today's date
+        var birthDate = new Date(dob); // Convert DOB to date object
+        var age = today.getFullYear() - birthDate.getFullYear(); // Calculate age
+        var mth = today.getMonth() - birthDate.getMonth(); // Calculate month difference
+        var eligibility; // Variable to hold eligibility message
+
+        // Determine eligibility based on age
+        if (age < 18) {
+          eligibility = "You Are Not Eligible For A License."; // Not eligible
+        } else if (age === 18) {
+          eligibility = "You Are Just Eligible For A Learning License."; // Just eligible for learning license
+        } else {
+          eligibility = "You Are Eligible For A License."; // Eligible for a license
+        }
+        // Display the results
+        document.getElementById("result").innerHTML =
+          "<p><strong>FIRST NAME  :  " + Fname +
+          "<br>LAST NAME  :  " + Lname +
+          "<br>PHONE NO .  :  " + phNo +
+          "<br>ELIGIBILITY  :  " + eligibility +
+          "</strong></p>";
+      }
+    </script>
+
+  </body>
+</html>
