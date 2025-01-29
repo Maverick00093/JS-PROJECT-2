@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Salary Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(135deg, #ffcccb, #ffb6c1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.5s ease; 
+        font-family: 'Roboto', sans-serif; 
+      }
+      h1 {
+        height: 70px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #8b0000; 
+        animation: fadeIn 1s, bounce 1s infinite alternate; 
+        font-weight: 700;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .form {
+        height: 550px;
+        width: 40%;
+        background-color: rgba(255, 228, 196, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 20px; 
+      }
+      .form:hover {
+        transform: scale(1.05); 
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      }
+      label {
+        height: 30px;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+        color: #333; 
+      }
+      input {
+        height: 40px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 400;
+        display: block;
+        background-color: #ff7f50; 
+        color: rgb(255, 255, 255);
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 5px;
+        padding: 0 10px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      input:focus {
+        background-color: #ff6347; 
+        outline: none; 
+        transform: scale(1.02);
+      }
+      button {
+        height: 40px;
+        width: 40%;
+        background-color: #fe95a5;
+        font-size: 23px;
+        font-weight: 600;
+        color: #8b0000;
+        border: none;
+        border-radius: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      button:hover {
+        background-color: #ff6f61;
+        transform: scale(1.1);
+      }
+      .butt {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .result {
+        margin-top: 20px; 
+        font-size: 18px; 
+        animation: slideIn 0.5s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1>EMPLOYEE SALARY</h1>
+      <form action="" onsubmit="calculateSalary(event)">
+        <label for="name">EMPLOYEE NAME :</label>
+        <input type="text" name="name" id="name" placeholder="Enter your name" required />
+        <label for="Id">EMPLOY ID :</label>
+          <input type="text" name="id" id="Id" placeholder="Enter your Id" required />
+        <label for="salary">ADD SALARY :</label>
+        <input type="text" name="salary" id="salary" placeholder="Enter your Salary" min="0" required />
+        <div class="butt">
+          <button type="submit" id="button">CALCULATE SALARY</button>
+        </div>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculateSalary(event) {
+            event.preventDefault();
+            var basicSalary = parseFloat(document.getElementById("salary").value);
+            if (basicSalary <= 0) {
+                alert("PLEASE ENTER A VALID SALARY");
+                return;
+            }
+            var pfDeduction = basicSalary * 0.10;
+            let ptDeduction = 0; 
+            if (basicSalary < 10000) {
+                ptDeduction = 200; 
+            } else if (basicSalary >= 10000 && basicSalary <= 50000) {
+                ptDeduction = 500; 
+            } else {
+                ptDeduction = 1000; 
+            }
+            var onHandSalary = basicSalary - pfDeduction - ptDeduction; 
+            var result = `
+                <p><strong>PF Deduction: ${pfDeduction.toFixed(2)}</strong></p>
+                <p><strong>PT Deduction: ${ptDeduction}</strong></p>
+                <p><strong>In Hand Salary: ${onHandSalary.toFixed(2)}</strong></p>
+           `;
+            document.querySelector(".result").innerHTML = result; 
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Billing System</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Arial", sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+        animation: fadeIn 1s;
+        background-image: url(https://static.vecteezy.com/system/resources/previews/026/859/856/non_2x/of-a-variety-of-delicious-food-displayed-on-a-white-table-with-copy-space-free-photo.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .container {
+        width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .total {
+        font-weight: bold;
+        font-size: 1.5em;
+        margin-top: 20px;
+        text-align: right;
+        color: #333;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: background-color 0.3s;
+        width: 100%;
+        margin-top: 10px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .invoice {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 1.5em;
+        }
+        button {
+          font-size: 0.9em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Restaurant Billing System</h1>
+      <form id="billingForm">
+        <table>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          <tr>
+            <td>Burger</td>
+            <td>69.00</td>
+            <td><input type="number" name="burger" min="0" value="0" /></td>
+          </tr>
+          <tr>
+            <td>Pizza</td>
+            <td>119.00</td>
+            <td><input type="number" name="pizza" min="0" value="0" /></td>
+          </tr>
+          <tr>
+            <td>Pasta</td>
+            <td>79.00</td>
+            <td><input type ="number" name="pasta" min="0" value="0" /></td>
+          </tr>
+          <tr>
+            <td>Salad</td>
+            <td>59.00</td>
+            <td><input type="number" name="salad" min="0" value="0" /></td>
+          </tr>
+          <tr>
+            <td>Soda</td>
+            <td>29.00</td>
+            <td><input type="number" name="soda" min="0" value="0" /></td>
+          </tr>
+        </table>
+        <button type="button" onclick="calculateTotal()">
+          Calculate Total
+        </button>
+      </form>
+      <div class="total" id="totalAmount">Total: 0.00</div>
+      <div class="invoice" id="invoiceSection" style="display: none;">
+        <h2>Invoice</h2>
+        <div id="invoiceDetails"></div>
+      </div>
+    </div>
+
+    <script>
+      function calculateTotal() {
+        const form = document.getElementById("billingForm");
+        const burgerPrice = 69.0;
+        const pizzaPrice = 119.0;
+        const pastaPrice = 79.0;
+        const saladPrice = 59.0;
+        const sodaPrice = 29.0;
+
+        const burgerQty = form.burger.value;
+        const pizzaQty = form.pizza.value;
+        const pastaQty = form.pasta.value;
+        const saladQty = form.salad.value;
+        const sodaQty = form.soda.value;
+
+        const total =
+          burgerQty * burgerPrice +
+          pizzaQty * pizzaPrice +
+          pastaQty * pastaPrice +
+          saladQty * saladPrice +
+          sodaQty * sodaPrice;
+
+        document.getElementById("totalAmount").innerHTML = "Total: " + total;
+        
+        // Generate invoice details
+        let invoiceDetails = '';
+        if (burgerQty > 0) {
+          invoiceDetails += `<p>Burger x ${burgerQty} = ${(burgerQty * burgerPrice)}</p>`;
+        }
+        if (pizzaQty > 0) {
+          invoiceDetails += `<p>Pizza x ${pizzaQty} = ${(pizzaQty * pizzaPrice)}</p>`;
+        }
+        if (pastaQty > 0) {
+          invoiceDetails += `<p>Pasta x ${pastaQty} = ${(pastaQty * pastaPrice)}</p>`;
+        }
+        if (saladQty > 0) {
+          invoiceDetails += `<p>Salad x ${saladQty} = ${(saladQty * saladPrice)}</p>`;
+        }
+        if (sodaQty > 0) {
+          invoiceDetails += `<p>Soda x ${sodaQty} = ${(sodaQty * sodaPrice)}</p>`;
+        }
+
+        document.getElementById("invoiceDetails").innerHTML = invoiceDetails;
+        document.getElementById("invoiceSection").style.display = invoiceDetails ? 'block' : 'none';
+      }
+    </script>
+  </body>
+</html>

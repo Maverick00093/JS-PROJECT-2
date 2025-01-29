@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(https://4kwallpapers.com/images/wallpapers/bart-simpson-the-7680x4320-9429.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .form {
+        height: auto;
+        width: 30%; /* Adjusted width for better appearance */
+        padding: 20px;
+        border: 10px solid transparent; /* Set a transparent border initially */
+        border-radius: 10px;
+        box-shadow: 0 30px 40px rgba(0, 0, 0, 0.5);
+        background-color: rgba(240, 248, 255, 0.76);
+        color: black;
+        position: relative; /* Position relative for pseudo-element */
+        overflow: hidden; /* Hide overflow for the pseudo-element */
+      }
+
+      .form::before {
+        content: "";
+        position: absolute;
+        top: -10px; /* Adjust to match border width */
+        left: -10px; /* Adjust to match border width */
+        right: -10px; /* Adjust to match border width */
+        bottom: -10px; /* Adjust to match border width */
+        border: 10px solid transparent; /* Set a transparent border */
+        border-radius: 10px; /* Match the border radius */
+        animation: circularBorder 2s linear infinite; /* Animation for circular border */
+        z-index: -1; /* Place behind the form */
+      }
+
+      @keyframes circularBorder {
+        0% {
+          border-color: rgba(255, 0, 0, 0.664); /* Start with red */
+          transform: rotate(0deg); /* Start rotation */
+        }
+        25% {
+          border-color: rgba(0, 255, 0, 0.665); /* Change to green */
+          transform: rotate(90deg); /* Rotate 90 degrees */
+        }
+        50% {
+          border-color: rgba(0, 0, 255, 0.644); /* Change to blue */
+          transform: rotate(180deg); /* Rotate 180 degrees */
+        }
+        75% {
+          border-color: rgba(255, 255, 0, 0.588); /* Change to yellow */
+          transform: rotate(270deg); /* Rotate 270 degrees */
+        }
+        100% {
+          border-color: rgba(255, 0, 0, 0.646); /* Back to red */
+          transform: rotate(360deg); /* Complete rotation */
+        }
+      }
+      @media (max-width: 600px) {
+        .form {
+          width: 90%; /* Full width on small screens */
+        }
+      }
+
+      label {
+        font-size: 18px;
+        font-weight: 700;
+        display: block; 
+        margin-bottom: 5px;
+      }
+
+      input {
+        height: 40px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 500;
+        display: block;
+        background-color: rgb(0, 208, 255);
+        color: rgb(0, 0, 0);
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 5px;
+        padding: 0 10px;
+        cursor: pointer;
+      }
+
+      .animated-button {
+        position: relative;
+        padding: 15px 30px;
+        font-size: 18px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.3s ease, color 0.4s ease;
+      }
+
+      .animated-button:hover {
+        transform: scale(1.1);
+        color: #ffffff;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1>GRAD SYSTEM</h1>
+      <form onsubmit="event.preventDefault(); grad();">
+        <label for="SUB1">PHYSICS MARKS :</label>
+        <input type="number" id="SUB1" min="0" max="100" required />
+
+        <label for="SUB2">CHEMISTRY MARKS :</label>
+        <input type="number" id="SUB2" min="0" max="100" required />
+
+        <label for="SUB3">BIOLOGY MARKS :</label>
+        <input type="number" id="SUB3" min="0" max="100" required />
+
+        <label for="SUB4">ENGLISH MARKS :</label>
+        <input type="number" id="SUB4" min="0" max="100" required />
+
+        <label for="SUB5">DRAWING MARKS :</label>
+        <input type="number" id="SUB5" min="0" max="100" required />
+
+        <button class="animated-button" type="submit">CALCULAT GRAD</button>
+      </form>
+      <div class="result"></div>
+    </div>
+    <script>
+      function grad() {
+        var SUB1 = parseFloat(document.getElementById("SUB1").value);
+        var SUB2 = parseFloat(document.getElementById("SUB2").value);
+        var SUB3 = parseFloat(document.getElementById("SUB3").value);
+        var SUB4 = parseFloat(document.getElementById("SUB4").value);
+        var SUB5 = parseFloat(document.getElementById("SUB5").value);
+
+        var total = SUB1 + SUB2 + SUB3 + SUB4 + SUB5;
+        var pr = (total / 500) * 100;
+        var grad = "";
+
+        if (pr >= 90) {
+          grad = "A";
+        } else if (pr >= 80) {
+          grad = "B";
+        } else if (pr >= 70) {
+          grad = "C";
+        } else if (pr >= 60) {
+          grad = "D";
+        } else if (pr >= 50) {
+          grad = "F";
+        } else if (pr >= 33) {
+          grad = "E";
+        } else {
+          grad = "SAAL BARBAAD";
+        }
+
+        var resultMessage = `
+                <p><strong>TOTAL: ${total}</strong></p>
+                <p><strong>PERCENTAGE: ${pr.toFixed(2)}%</strong></p>
+                <p><strong>GRADE: ${grad}</strong></p>
+           `;
+        document.querySelector(".result").innerHTML = resultMessage;
+      }
+    </script>
+  </body>
+</html>
+&#10094;
+&#10095;
